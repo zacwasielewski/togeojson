@@ -40,7 +40,12 @@ toGeoJSON = (function() {
         }
         return o;
     }
-    function coordPair(x) { return [attrf(x, 'lon'), attrf(x, 'lat')]; }
+    function coordPair(x) {
+        var pair = [attrf(x, 'lon'), attrf(x, 'lat')],
+            ele = nodeVal(get1(x,'ele'));
+        if (ele) pair.push(ele);
+        return pair;
+    }
 
     // create a new feature collection parent object
     function fc() {
